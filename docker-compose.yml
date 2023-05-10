@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  pyrace:
+    build: .
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./racefiles:/racefiles
+
+  nginxweb:
+    image: "nginx:latest"
+    ports:
+      - "8081:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./nginx:/etc/nginx/sites-available/default
+    restart: always
+    depends_on:
+      - pyrace
+
+
+  cloudflared:
+    image: "cloudflare/cloudflared:latest"
+    command: tunnel --no-autoupdate run
+    env_file: ./tunnel.env
+    restart: always
+    depends_on:
+      - pyrace
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h2>PikaTools - Checkpoint Timer</h2>
+<p><strong>Current Race:-</strong> {{ race }} <strong>Current CP:-</strong> {{ checkpoint }} </p>
+<br/>
+Results:
+<br/>
+<form method="POST">
+    <label for="runnerid">Bib Number </label>
+    <input name="runnerid"><br/>
+    <input type="submit">
+</form>
+<br/>
+<br/
+<table>
+    <tr>
+        <th>Bib Number</th>
+        <th>Timestamp</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+        <td>{{item.bib}}</td>
+        <td>{{item.ts}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+
